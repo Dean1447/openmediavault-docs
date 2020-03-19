@@ -12,43 +12,42 @@ Is |omv| a fork of FreeNAS?
 Does |omv| have drivers for my hardware?
 	All module drivers are provided by the Debian standard kernel of oldstable
 	release 8.9 (aka Jessie). This distribution ships with kernel 3.16 by
-	default. Optionally is possible to install the backport kernel 4.9. If
-	hardware is supported under Debian Jessie then is supported under |omv|.
+	default. Optionally it is possible to install the backport kernel 4.9. If
+	hardware is supported under Debian Jessie then it is supported under |omv|.
 	The Jessie backport kernel 4.9 is the default kernel used by Stretch
 	(Debian 9.3) at the moment, so it provides support for newer hardware.
 
 Can I use a usb flash drive (stick) for installing the system?
 	Yes, but the installation does not have any optimizations to reduce writes
 	into the OS disk. The usb media will most likely start failing within a
-	few weeks of usage. Most common symptom is basic command execution does
+	few weeks of usage. Most common symptoms are: basic command execution does
 	not work, denied login, etc. More information `here <https://forum.openmediavault.org/index.php/Thread/6438-Tutorial-Experimental-Third-party-Plugin-available-Reducing-OMV-s-disk-writes-al/>`_.
 
-Can I give access to non-admin users to the web control panel?
-	No. By default non-admin users can only access their account profile, they can change
-	password and their email address if the admin has allowed changes on their account.
+Can I give non-admin users access to the web control panel?
+	No. By default non-admin users can only access their account profile, they can change their
+	password and email address if the admin has allowed changes to their account.
 	However the current |webui| framework is designed for developers to create plugins where
 	they can give limited or full access to non-admin users to their plugin. An example is in the
 	`openvpn plugin <https://github.com/OpenMediaVault-Plugin-Developers/openmediavault-openvpn>`_
 	by omv-extras.
 
 What is the file :file:`/etc/openmediavault/config.xml` for?
-	Is the database configuration store file for |omv|. When a change is
+	It is the database configuration storage file for |omv|. When a change is
 	performed in the |webui|, the config value is stored and/or retrieved by
-	RPC to/from this file. If this is a save change, then mkconf passes the
-	value to the service configuration file and reloads the daemon in case
-	is necessary.
+	RPC to/from this file. When changes are saved, mkconf passes the
+	value to the service configuration file and reloads the daemon when necessary.
 
 Can I upgrade to Debian Testing/Unstable (Debian Testing/Sid) or use Ubuntu as a base distribution?
 	Yes. But the end is most likely a broken |webui| and possibly broken
-	system. |omv| releases are heavily tight to their Debian base distribution.
+	system. |omv| releases are heavily tied to their Debian base distribution.
 
 I´ve lost the |webui| password. How do I reset it?
 	Simply connect via ssh into the server or login locally on the machine
 	and type in: :command:`omv-firstaid`. There is an option to reset the
 	|webui| password.
 
-Can I backup or restore and existing |omv| configuration?
-	No. Keep the file :file:`/etc/openmediavault/config.xml` for references
+Can I backup or restore an existing |omv| configuration?
+	No. Keep the file :file:`/etc/openmediavault/config.xml` for reference
 	purposes if the option is to go for a clean re-install.
 
 What is the default HTTP engine of |omv|?
@@ -60,31 +59,31 @@ Can I use Apache as HTTP engine?
 	instance next to Nginx is possible, just make sure the ports are different
 	otherwise the |omv| |webui| will not work.
 
-How can use the default HTTP engine to hold my own web page?
+How can I use the default HTTP engine to deliver my own web page?
 	Do not modify |omv| default NGINX files. Place the website configurations
 	in :file:`/etc/nginx/sites-available` and enable it with
 	:command:`nginx_ensite <SITE>`. Read more information in the
 	`NGINX documentation <http://nginx.org/en/docs/>`_.
 
-Why does the system rewrites a configuration file(s) that I have manually edited?
+Why does the system rewrite configuration files I have manually edited?
 	OMV takes full control of some system services. This services include
 	monit, ntp, samba, network, proftpd, nginx, php5-fpm, etc. Read
 	:doc:`here </various/files>`.
 
-How can I modify an internal value of some service |omv| has control over?
+How can I modify internal values of services |omv| has control over?
 	Read :doc:`here <various/advset>` for advanced configurations.
 
-How can I modify or add a network configuration of :file:`/etc/network/interfaces` with some custom options the |webui| does not provide?
+How can I modify or add a network configuration to :file:`/etc/network/interfaces` with some custom options the |webui| does not provide?
 	The interfaces file is controlled by |omv|. To add network interfaces
 	that are not configurable through the |webui| or other options not present,
 	use  :doc:`advanced settings <various/advset>`.
 
-Why my disks mount paths have a long alphanumeric number?
+Why do my disks mount paths have a long alphanumeric number?
 	The long number is called UUID, it is used by fstab to mount disks. This
 	number is unique per filesystem (or at least unlikely possible that
 	another filesystem comes with an identical one). This helps maintaining the
 	mount points. The old linux way (sda1, sdb1, etc.) is not guaranteed that
-	/sda1 is the same disk on next reboot. If having trouble identifying them
+	/sda1 is the same disk on next reboot. If you are having trouble identifying them
 	in terminal, create a pool with symlinks to each file system with easy to
 	remember names.
 
@@ -97,7 +96,7 @@ I don't have a data disk, and I want to use my OS disk for storing data?
 	files are separated from data disks.
 
 	However if the OS disk is partitioned the system will recognise the extra
-	partitions besides rootfs if is formatted. You can mount it and use it for
+	partitions besides rootfs if it is formatted. You can mount it and use it for
 	shared folders.
 
 	The current installer does not provide access to the partition manager,
@@ -106,12 +105,11 @@ I don't have a data disk, and I want to use my OS disk for storing data?
 	SystemRescueCd.
 
 Can I install |omv| on top a running Debian system?
-	Yes, but it is recommended that the current running OS not to have a desktop environment
-	installed.
+	Yes, but it is recommended that the current running OS does not include a desktop environment.
 
 What is the permissions/ownership of folders in |omv| created by shared folders?
 	The default is folders in ``2775`` mode, with ``root:users`` ownership.
-	This means all users created in the |webui| can read, write to folders
+	This means all users created in the |webui| can read and write to folders
 	created by the system in the data drives using the default. The setgid allows
 	group inheritance, meaning new files/folders below will always have the group
 	users (GID=100) membership.
@@ -121,17 +119,17 @@ Why are my filesystems mounted as noexec?
 	the shared folders. This will prevent any script execution in those paths,
 	including compiling packages and binaries.
 
-	If you need to remove the noexc flag, use advanced settings as decribed
+	If you need to remove the noexec flag, use advanced settings as decribed
 	:doc:`here </various/fs_env_vars>`.
 
-I need to delete a shared folder, why the delete button is greyed/disabled?
+I need to delete a shared folder, why is the delete button greyed/disabled?
 	Shared folder configurations can be used across different services. When
-	removing a shared folder configuration is necessary to unlink it from
-	every service is attached to, before the delete button becomes available.
+	removing a shared folder configuration it is necessary to unlink it from
+	every service it is attached to, before the delete button becomes available.
 	At the moment there is no internal database backend that can display
 	information about which service is holding which shares.
 
-What is the :command:`omv-mkconf` command for?
+What does the :command:`omv-mkconf` command do?
 	:command:`omv-mkconf` is a terminal console command that is used by the
 	backend of |omv| to pipe directives and values to service configuration
 	files. The arguments that :command:`omv-mkconf` accepts are related to the
@@ -139,16 +137,15 @@ What is the :command:`omv-mkconf` command for?
 	press TAB key, and the terminal will display all available arguments.
 
 I want to experiment with |omv| or make changes to the code
-	As a true open source system everything is possible. The
-	recommendation is do not test with the production server to avoid
-	breaking the |webui|. The best thing to do is to use a Virtual Machine.
+	As a true open source system everything is possible. Do not test with the production server to avoid
+	breaking the |webui|. Instead it is recommended to use a Virtual Machine.
 	On `Sourceforge <http://sourceforge.net/projects/openmediavault/files/vm/VirtualBox%20images/>`_
 	there are preconfigured |omv| images with virtual disks ready to launch.
 	Alternatively checkout the |omv| `GIT repository <https://scm.openmediavault.org/>`_
 	and use `Vagrant <https://www.vagrantup.com/>`_ to create a virtual
 	machine.
 
-Why there is no iscsitarget plugin in |omv| 4?
+Why is there no iscsitarget plugin in |omv| 4?
 	The iscsitarget software is divided in two parts. The `userland tools <https://packages.debian.org/source/jessie/iscsitarget>`_
 	and the `kernel modules <https://packages.debian.org/jessie/iscsitarget-dkms>`_ both are provided by Debian repository system.
 	Kernel modules come in the form of `DKMS <https://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support>`_. 
@@ -160,5 +157,5 @@ Why there is no iscsitarget plugin in |omv| 4?
 
 	The intention is to migrate core underlaying software from iscsitarget to `LIO targetcli <http://linux-iscsi.org/wiki/Targetcli>`_  
 
-What is the :command:`omv-update` and :command:`omv-release-upgrade` for?
+What do the :command:`omv-update` and :command:`omv-release-upgrade` do?
 	Information about those commands are in the software :doc:`section </various/apt>`.
